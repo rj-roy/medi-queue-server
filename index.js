@@ -69,12 +69,37 @@ const run = async () => {
             res.send(result);
         });
 
-        app.delete('/del/tutors/"id',(req,res)=>{
+        app.delete('/del/tutors/:id', (req, res) => {
             const id = req.params.id;
             const query = {
                 _id: new ObjectId(id),
             };
             const result = collection.deleteOne(query);
+            res.send(result);
+        });
+
+        app.patch('/tutors/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = {
+                _id: new ObjectId(id)
+            };
+            const modifiedUser = req.body;
+            const updatedDocument = {
+                $set: {
+                    tutorName: modifiedUser.tutorName,
+                    photo: modifiedUser.photo,
+                    subject: modifiedUser.subject,
+                    availableDays: modifiedUser.availableDays,
+                    timeSlot: modifiedUser.timeSlot,
+                    totalSlot: modifiedUser.totalSlot,
+                    hourlyFee: modifiedUser.hourlyFee,
+                    sessionStartDate: modifiedUser.sessionStartDate,
+                    institutionExperience: modifiedUser.institutionExperience,
+                    location: modifiedUser.location,
+                    teachingMode: modifiedUser.teachingMode
+                },
+            };
+            const result = await collection.updateOne(query, updatedDocument);
             res.send(result);
         });
 
