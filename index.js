@@ -66,7 +66,15 @@ const run = async () => {
                 _id: new ObjectId(id),
             };
             const result = bookings.deleteOne(query);
-            console.log(await result, "deleted booking");
+            res.send(result);
+        });
+
+        app.delete('/del/tutors/"id',(req,res)=>{
+            const id = req.params.id;
+            const query = {
+                _id: new ObjectId(id),
+            };
+            const result = collection.deleteOne(query);
             res.send(result);
         });
 
