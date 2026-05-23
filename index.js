@@ -19,7 +19,7 @@ const client = new MongoClient(process.env.DB_URI, {
 
 const run = async () => {
     try {
-        await client.connect();
+        // await client.connect();
         const db = await client.db(process.env.DB_NAME);
         const collection = await db.collection(process.env.DB_COLLECTION);
         const bookings = await db.collection(process.env.BOOKING_COLLECTION);
